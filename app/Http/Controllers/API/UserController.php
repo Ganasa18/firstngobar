@@ -63,12 +63,16 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try {
+            
+            // validasi input             
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => $this->passwordRules()
             ]);
-
+            
+            
+            // membuat user baru ke table             
             User::create([
                 'name' =>  $request->name,
                 'email' => $request->email,
@@ -77,8 +81,11 @@ class UserController extends Controller
                 'is_active' => $request->is_active,
                 'role' => $request->role,
             ]);
-
+            
+            // dapatkan data user yang sudah dibuat             
             $user = User::where('email', $request->email)->first();
+            
+            // membuat token user             
             $tokenResult = $user->createToken('authToken')->plainTextToken;
 
             return ResponseFormatter::success([
