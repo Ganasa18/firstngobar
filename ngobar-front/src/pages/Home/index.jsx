@@ -1,7 +1,12 @@
 import React from "react";
+import { Card, Container } from "./HomeStyled";
 
 const Home = () => {
-  return <div>Home Page</div>;
+  return (
+    <Container>
+      <div>Test</div>
+    </Container>
+  );
 };
 
 export default Home;
