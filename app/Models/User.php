@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +24,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'is_active',
+        'role',
     ];
 
     /**
@@ -41,4 +47,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function role()
+    {
+        return $this->hasOne(Role::class, 'id', 'role');
+    }
+
+    public function getCreatedAtAttribute($created_at)
+    {
+        return Carbon::parse($created_at)
+            ->getPreciseTimestamp(3);
+    }
+    public function getUpdatedAtAttribute($updated_at)
+    {
+        return Carbon::parse($updated_at)
+            ->getPreciseTimestamp(3);
+    }
 }
