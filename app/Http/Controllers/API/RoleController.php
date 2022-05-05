@@ -107,46 +107,5 @@ class RoleController extends Controller
                 404
             );
         }
-
-
-
-        // if ($role->count() > 0) {
-
-        //     return response()->json(['error' => $role->count()], 200);
-        // } else {
-
-        //     return response()->json(['error' => 'something wrong'], 500);
-        // }
-
-
-
-        // try {
-
-        //     $role = Role::find($id);
-        //     return response()->json(['error' => $role], 500);
-        //     // Check role id ditemukan
-        //     // if ($role) {
-
-        //     //     return ResponseFormatter::success('Data tidak ditemukan');
-        //     // }
-
-        //     // return ResponseFormatter::success([], 'Role berhasil di hapus');
-        // } catch (Exception $error) {
-        //     return response()->json(['error' => $error], 500);
-        // }
-
-        // $role = Role::find($id);
-        // // Check role id ditemukan
-        // if ($role) {
-
-        //     return ResponseFormatter::success('Data berhasil di hapus');
-        // } else {
-        //     // Tampilkan error 
-        //     return ResponseFormatter::error(
-        //         null,
-        //         'Data produk tidak ada',
-        //         404
-        //     );
-        // }
     }
 }
