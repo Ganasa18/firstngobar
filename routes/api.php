@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\UserController;
 
 
 /*
@@ -37,3 +38,6 @@ Route::delete('role/{id}', [RoleController::class, 'delete']);
 // Category Route
 
 Route::get('category', [CategoryController::class, 'all']);
+Route::post('category', [CategoryController::class, 'create']);
+Route::patch('category/{id}', [CategoryController::class, 'update']);
+Route::delete('category/{id}', [CategoryController::class, 'delete']);

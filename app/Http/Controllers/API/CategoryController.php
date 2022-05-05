@@ -40,4 +40,69 @@ class CategoryController extends Controller
             'Data list category berhasil di dapatkan'
         );
     }
+
+
+    public function create(Request $request)
+    {
+        try {
+            $validator  = Validator::make($request->all(), [
+                'category' => 'required',
+            ]);
+
+
+            // check jika validasi tidak valid
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()], 500);
+            }
+
+            // create data jika validasi valid
+            $category = Category::create([
+                'category' => $request->category,
+            ]);
+            return ResponseFormatter::success([
+                $category,
+            ], 'Category Created');
+
+            // jika error tampilkan catch error
+        } catch (Exception $error) {
+            return response()->json(['error' => $error], 500);
+        }
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $category = Category::find($id);
+
+        // check jika id ditemukan
+        if ($category) {
+            $category->category = $request->category;
+            // Simpan perubahan setelah id ditemukan
+            $category->save();
+            return ResponseFormatter::success($category, 'Data berhasil di ubah');
+        } else {
+            // Tampilkan error 
+            return ResponseFormatter::error(
+                null,
+                'Data produk tidak ada',
+                404
+            );
+        }
+    }
+
+
+    public function delete(Request $request, $id)
+    {
+        try {
+            $category = Category::findorfail($id);
+            $category->delete();
+            return ResponseFormatter::success($category, 'Data berhasil di hapus');
+        } catch (ModelNotFoundException $e) {
+            return ResponseFormatter::error(
+                null,
+                'something wrong',
+                404
+            );
+        }
+    }
 }
