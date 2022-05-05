@@ -25,7 +25,7 @@ class RoleController extends Controller
             else
                 return ResponseFormatter::error(
                     null,
-                    'Data produk tidak ada',
+                    'Data tidak ditemukan',
                     404
                 );
         }
