@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RoleController;
+use App\Http\Controllers\API\CategoryController;
 
 
 /*
@@ -31,3 +32,8 @@ Route::get('role', [RoleController::class, 'all']);
 Route::post('role', [RoleController::class, 'create']);
 Route::patch('role/{id}', [RoleController::class, 'update']);
 Route::delete('role/{id}', [RoleController::class, 'delete']);
+
+
+// Category Route
+
+Route::get('category', [CategoryController::class, 'all']);
